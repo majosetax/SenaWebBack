@@ -28,7 +28,7 @@ class ActivationCompanyUserFactory extends Factory
             'state_id' => $this->faker->randomElement([1, 2]),
             'company_id' => Company::inRandomOrder()->first()->id,
             'fechaInicio' => $this->faker->date,
-            'fechaFin' => $this->faker->date,
+            'fechaFin' => '2024-05-15',
         ];
     }
 }
