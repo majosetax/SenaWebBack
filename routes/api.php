@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\gestion_empresa\CompanyController;
 use App\Http\Controllers\gestion_rol\RolController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\UserController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\gestion_mediopago\MedioPagoController;
 use App\Http\Controllers\gestion_notificacion\NotificacionController;
 use App\Http\Controllers\gestion_proceso\ProcesoController;
@@ -12,6 +15,8 @@ use App\Http\Controllers\gestion_tipo_documento\TipoDocumentoController;
 use App\Http\Controllers\gestion_tipopago\TipoPagoController;
 use App\Http\Controllers\gestion_tipotransaccion\TipoTransaccionController;
 use App\Http\Controllers\gestion_usuario\UserController as Gestion_usuarioUserController;
+use App\Http\Controllers\InfraestructuraController;
+use App\Http\Controllers\SedeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -66,3 +71,12 @@ Route::get('lista_usuarios', [Gestion_usuarioUserController::class, 'getUsers'])
 Route::resource('usuarios', Gestion_usuarioUserController::class);
 
 Route::put('asignar_roles', [Gestion_usuarioUserController::class, 'asignation']);
+
+//rutas para ciudad y departamento
+Route::resource('ciudades',CityController::class);
+Route::resource('departamentos',CountryController::class);
+
+//rutas infraestructura
+Route::resource('sedes',SedeController::class);
+Route::resource('areas',AreaController::class);
+Route::resource('infraestructuras',InfraestructuraController::class);
