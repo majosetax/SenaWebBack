@@ -6,6 +6,7 @@ use App\Models\ActivationCompanyUser;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 class ActivationCompanyUserFactory extends Factory
 {
@@ -28,7 +29,7 @@ class ActivationCompanyUserFactory extends Factory
             'state_id' => $this->faker->randomElement([1, 2]),
             'company_id' => Company::inRandomOrder()->first()->id,
             'fechaInicio' => $this->faker->date,
-            'fechaFin' => '2024-05-15',
+            'fechaFin' => Carbon::now()->addDays($this->faker->numberBetween(1, 30)),
         ];
     }
 }
