@@ -13,7 +13,7 @@ class CityController extends Controller
     public function index()
     {
         $data =City::with(['departamento','sedes']) -> get();
-        return response() -> json(['Ciudades' => $data]);
+        return response() -> json($data);
     }
 
     
@@ -23,6 +23,6 @@ class CityController extends Controller
     public function show(int $id)
     {
         $data =City::with(['departamento','sedes']) -> find($id);
-        return response() -> json(['Ciudades' => $data]);
+        return response() -> json($data);
     }
 }

@@ -13,7 +13,7 @@ class CountryController extends Controller
     public function index()
     {
         $data =Country::with('ciudades') -> get();
-        return response() -> json(['Departamentos' => $data]);
+        return response() -> json($data);
     }
 
     /**
@@ -22,6 +22,6 @@ class CountryController extends Controller
     public function show($id)
     {
         $data =Country::with('ciudades') -> find($id);
-        return response() -> json(['Departamentos' => $data]);
+        return response() -> json($data);
     }
 }

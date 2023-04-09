@@ -13,7 +13,7 @@ class SedeController extends Controller
     public function index()
     {
         $data = Sede::with(['ciudad','infraestructuras']) -> get();
-        return response() -> json(['Sedes' => $data]);
+        return response() -> json($data);
     }
 
     /**
@@ -28,23 +28,8 @@ class SedeController extends Controller
         $post -> descripcion = $request -> descripcion;
         $post -> idCiudad = $request -> idCiudad;
 
-        $res = $post -> save();
-        if($res){
-            return response() -> json(
-                [
-                    'message' => (
-                        'Sede '
-                        .$post -> nombreSede
-                        .' subida correctamente'
-                    )
-                ],
-                201
-            );
-        }
-        return response() -> json(
-            ['Error' => 'te falto introducir un dato'],
-            500
-        );
+        $post -> save();
+
     }
 
     /**
@@ -53,7 +38,7 @@ class SedeController extends Controller
     public function show(int $id)
     {
         $sede = Sede::with(['ciudad','infraestructuras']) -> find($id);
-        return response() -> json(['Sede:' => $sede]);
+        return response() -> json($sede);
     }
 
     /**
@@ -82,9 +67,7 @@ class SedeController extends Controller
     
         // Guardar los cambios en la base de datos
         $registro->save();
-    
-        // retornar el registro actualizado
-        return response() -> json(['actualizado' => $registro]);
+
     }
     
 
@@ -94,8 +77,7 @@ class SedeController extends Controller
     public function destroy(int $id)
     {
         $competencia = Sede::findOrFail($id);
-        $nombre = $competencia -> nombreSede;
         $competencia->delete();
-        return response()->json(['Se elimino: '.$nombre]);
+        
     }
 }

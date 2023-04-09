@@ -13,7 +13,7 @@ class InfraestructuraController extends Controller
     public function index()
     {
         $data = InfraEstructura::with(['sede','area']) -> get();
-        return response() -> json(['InfraEstructura' => $data]);
+        return response() -> json($data);
     }
 
     /**
@@ -25,26 +25,11 @@ class InfraestructuraController extends Controller
         $post -> nombreInfraestructura = $request -> nombreInfraestructura;
         $post -> capacidad = $request -> capacidad;
         $post -> descripcion = $request -> descripcion;
-        $post -> idArea = $request -> idArea;
         $post -> idSede = $request -> idSede;
+        $post -> idArea = $request -> idArea;
 
-        $res = $post -> save();
-        if($res){
-            return response() ->  json(
-                [
-                    'message' => (
-                        'InfraEstructura '
-                        .$post -> nombreInfraestructura
-                        .' subida correctamente'
-                    )
-                ],
-                201
-            );
-        }
-        return response() -> json(
-            ['error' => 'te falto introducir un dato'],
-            500
-        );
+        $post -> save();
+
     }
 
     /**
@@ -53,7 +38,7 @@ class InfraestructuraController extends Controller
     public function show(int $id)
     {
         $infraestructura = InfraEstructura::with(['sede','area']) -> find($id);
-        return response() -> json(['Infraestructura'=> $infraestructura]);
+        return response() -> json($infraestructura);
     }
 
     /**
@@ -78,8 +63,6 @@ class InfraestructuraController extends Controller
         $registro -> idSede = $request -> idSede;
 
         $registro -> save();
-
-        return response() -> json(['actualizado' => $registro]);
     }
 
     /**
@@ -88,8 +71,7 @@ class InfraestructuraController extends Controller
     public function destroy(int $id)
     {
         $infraestructura = InfraEstructura::findOrFail($id);
-        $nombre = $infraestructura -> nombreInfraestructura;
         $infraestructura -> delete();
-        return response() -> json(['Se elimino: '.$nombre]);
+        
     }
 }
