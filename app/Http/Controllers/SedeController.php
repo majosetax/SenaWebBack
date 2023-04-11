@@ -21,6 +21,19 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
+        /*$sedes= $request->input('sede');
+
+        foreach ($sedes as $sede) {
+            Sede::create([
+                'nombreSede' => $sede['nombreSede'],
+                'direccion' => $sede['direccion'],
+                'telefono' => $sede['telefono'],
+                'descripcion' => $sede['descripcion'],
+                'idCiudad' => $sede['idCiudad']
+                // Agrega aquí cualquier otro campo que necesites
+            ]);
+        }*/
+
         $post = new Sede();
         $post -> nombreSede = $request -> nombreSede;
         $post -> direccion = $request -> direccion;
@@ -28,7 +41,7 @@ class SedeController extends Controller
         $post -> descripcion = $request -> descripcion;
         $post -> idCiudad = $request -> idCiudad;
 
-        $post -> save();
+        $post -> save(); //solo permitia subir una sede
 
     }
 

@@ -14,8 +14,12 @@ class AreaSeeder extends Seeder
      */
     public function run()
     {
-        $this ->saveArea('tics','2');
-        $this ->saveArea('otros','3');
+        $this ->saveArea('TICS','1');
+        $this ->saveArea('COCINA','2');
+        $this ->saveArea('LUDICA','3');
+        $this ->saveArea('ACADEMICO','4');
+        $this ->saveArea('OTROS','5');
+
     }
 
     private function saveArea(string $nombreArea, string $codigo)

@@ -15,9 +15,9 @@ class AlterTableInfraestructura extends Migration
     {
         Schema::table('infraestructura', function (Blueprint $table) {
             $table->unsignedInteger('idSede');
-            $table->foreign('idSede')->references('id')->on('sede');
+            $table->foreign('idSede')->references('id')->on('sede')->onDelete('cascade');
             $table->unsignedInteger('idArea');
-            $table->foreign('idArea')->references('id')->on('area');
+            $table->foreign('idArea')->references('id')->on('area')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,7 @@ class AlterTableSede extends Migration
     {
         Schema::table('sede', function (Blueprint $table) {
             $table->unsignedInteger('idCiudad');
-            $table->foreign('idCiudad')->references('id')->on('ciudad');
+            $table->foreign('idCiudad')->references('id')->on('ciudad')->onDelete('cascade');
         });
     }
 
