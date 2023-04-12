@@ -21,18 +21,6 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        /*$sedes= $request->input('sede');
-
-        foreach ($sedes as $sede) {
-            Sede::create([
-                'nombreSede' => $sede['nombreSede'],
-                'direccion' => $sede['direccion'],
-                'telefono' => $sede['telefono'],
-                'descripcion' => $sede['descripcion'],
-                'idCiudad' => $sede['idCiudad']
-                // Agrega aquí cualquier otro campo que necesites
-            ]);
-        }*/
 
         $post = new Sede();
         $post -> nombreSede = $request -> nombreSede;
@@ -41,7 +29,7 @@ class SedeController extends Controller
         $post -> descripcion = $request -> descripcion;
         $post -> idCiudad = $request -> idCiudad;
 
-        $post -> save(); //solo permitia subir una sede
+        $post -> save();
 
     }
 
@@ -52,6 +40,17 @@ class SedeController extends Controller
     {
         $sede = Sede::with(['ciudad','infraestructuras']) -> find($id);
         return response() -> json($sede);
+    }
+
+    /**
+     * Muestra las sedes dependiendo de la ciudad
+     */
+    public function showByCiudad(int $id){
+        $sedes = Sede::with(['ciudad','infraestructuras'])
+            -> where('idCiudad',$id)
+            -> get();
+
+        return response() -> json($sedes);
     }
 
     /**
@@ -67,22 +66,22 @@ class SedeController extends Controller
             'descripcion' => 'required',
             'idCiudad' => 'required'
         ]);
-    
+
         // Encontrar el registro a actualizar en la base de datos
         $registro = Sede::findOrFail($id);
-    
+
         // Actualizar los valores del registro
         $registro->nombreSede = $request->nombreSede;
         $registro->direccion = $request->direccion;
         $registro->telefono = $request->telefono;
         $registro->descripcion = $request->descripcion;
         $registro->idCiudad = $request->idCiudad;
-    
+
         // Guardar los cambios en la base de datos
         $registro->save();
 
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,6 +90,6 @@ class SedeController extends Controller
     {
         $competencia = Sede::findOrFail($id);
         $competencia->delete();
-        
+
     }
 }

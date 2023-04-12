@@ -73,10 +73,15 @@ Route::resource('usuarios', Gestion_usuarioUserController::class);
 Route::put('asignar_roles', [Gestion_usuarioUserController::class, 'asignation']);
 
 //rutas para ciudad y departamento
-Route::resource('ciudades',CityController::class);
 Route::resource('departamentos',CountryController::class);
+Route::resource('ciudades',CityController::class);
+Route::get('ciudades/departamento/{id}', [CityController::class,'showByDepartamento']);
 
 //rutas infraestructura
 Route::resource('sedes',SedeController::class);
+Route::get('sedes/ciudad/{id}', [SedeController::class,'showByCiudad']);
 Route::resource('areas',AreaController::class);
 Route::resource('infraestructuras',InfraestructuraController::class);
+Route::get('infraestructuras/sede/{id}', [InfraestructuraController::class,'showBySede']);
+Route::get('infraestructuras/area/{id}', [InfraestructuraController::class,'showByArea']);
+Route::get('infraestructuras/sede/{idSede}/area/{idArea}', [InfraestructuraController::class,'showBySedeArea']);

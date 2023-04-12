@@ -40,7 +40,37 @@ class InfraestructuraController extends Controller
         $infraestructura = InfraEstructura::with(['sede','area']) -> find($id);
         return response() -> json($infraestructura);
     }
+     /**
+     * Muestra las infraestructuras dependiendo de la sede
+     */
+    public function showBySede(int $id){
+        $infraestructuras = Infraestructura::with(['sede','area'])
+            -> where('idSede',$id)
+            -> get();
 
+        return response() -> json($infraestructuras);
+    }
+    /**
+     * Muestra las infraestructuras dependiendo de la area
+     */
+    public function showByArea(int $id){
+        $infraestructuras = Infraestructura::with(['sede','area'])
+            -> where('idArea',$id)
+            -> get();
+
+        return response() -> json($infraestructuras);
+    }
+    /**
+     * Muestra las infraestructuras dependiendo de la sede y la ciudad
+     */
+    public function showBySedeArea(int $idSede,int $idArea){
+        $infraestructuras = Infraestructura::with(['sede','area'])
+            -> where('idSede',$idSede)
+            -> where('idArea',$idArea)
+            -> get();
+
+        return response() -> json($infraestructuras);
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -72,6 +102,6 @@ class InfraestructuraController extends Controller
     {
         $infraestructura = InfraEstructura::findOrFail($id);
         $infraestructura -> delete();
-        
+
     }
 }
