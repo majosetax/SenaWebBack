@@ -74,13 +74,21 @@ Route::put('asignar_roles', [Gestion_usuarioUserController::class, 'asignation']
 
 //rutas para ciudad y departamento
 Route::resource('departamentos',CountryController::class);
-Route::resource('ciudades',CityController::class);
-Route::get('ciudades/departamento/{id}', [CityController::class,'showByDepartamento']);
 
-//rutas infraestructura
+Route::prefix('ciudades')->group(function () {
+    Route::resource('/',CityController::class);
+    Route::get('/departamento/{id}', [CityController::class,'showByDepartamento']);
+});
+
+
+//rutas sede -> revisar y optimizar
 Route::resource('sedes',SedeController::class);
 Route::get('sedes/ciudad/{id}', [SedeController::class,'showByCiudad']);
+
+//ruta de areas
 Route::resource('areas',AreaController::class);
+
+//rutas de infraestructura -> revisar y optimizar (crear un grupo de rutas como en ciudades)
 Route::resource('infraestructuras',InfraestructuraController::class);
 Route::get('infraestructuras/sede/{id}', [InfraestructuraController::class,'showBySede']);
 Route::get('infraestructuras/area/{id}', [InfraestructuraController::class,'showByArea']);
