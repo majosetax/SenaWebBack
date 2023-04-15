@@ -14,7 +14,7 @@ class CreateInfraestructurasTable extends Migration
     public function up()
     {
         Schema::create('infraestructura', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombreInfraestructura');
             $table->integer('capacidad');
             $table->text('descripcion');
