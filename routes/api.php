@@ -16,6 +16,7 @@ use App\Http\Controllers\gestion_tipopago\TipoPagoController;
 use App\Http\Controllers\gestion_tipotransaccion\TipoTransaccionController;
 use App\Http\Controllers\gestion_usuario\UserController as Gestion_usuarioUserController;
 use App\Http\Controllers\InfraestructuraController;
+use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\SedeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -90,3 +91,5 @@ Route::resource('infraestructuras',InfraestructuraController::class);
 Route::get('infraestructuras/sede/{id}', [InfraestructuraController::class,'showBySede']);
 Route::get('infraestructuras/area/{id}', [InfraestructuraController::class,'showByArea']);
 Route::get('infraestructuras/sede/{idSede}/area/{idArea}', [InfraestructuraController::class,'showBySedeArea']);
+
+Route::resource('pruebas',PruebaController::class);

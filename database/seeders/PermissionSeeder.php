@@ -27,6 +27,7 @@ class PermissionSeeder extends Seeder
         $this->savePermission(PermissionConst::GESTION_SEDE, "Gestión de sedes");
         $this->savePermission(PermissionConst::GESTION_AREA, "Gestión de areas");
         $this->savePermission(PermissionConst::GESTION_INFRAESTRUCTURA, "Gestión de infraestructuras");
+        $this->savePermission(PermissionConst::PRUEBA_PERMISOS, "Prueba de permisos");
         
     }
 
